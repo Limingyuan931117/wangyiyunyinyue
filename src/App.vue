@@ -1,16 +1,40 @@
 <template>
-  <div id="app">
-    <div id="nav">
+  <div id="app" @dblclick="handleClick">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    </div>-->
+    <!-- <router-view /> -->
+    {{message}}
+    <input type="text" />
   </div>
 </template>
+<script>
+import { Component, Vue } from "vue-property-decorator";
+import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { getDetail } from "@/api";
 
+@Component({
+  components: {
+    HelloWorld
+  }
+})
+export default class Home extends Vue {
+  message = "1231321";
+  handleClick = () => {
+    console.log(this.message);
+  };
+  created() {
+    console.log("1");
+    getDetail().then(res => {
+      console.log(res);
+    });
+  }
+}
+</script>
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
